@@ -1,9 +1,14 @@
 import React from "react";
 
-import HomePage from "./screens/HomePage";
+import { BrowserRouter } from 'react-router-dom';
+import MainLayout from "./layout/MainLayout";
 
 function App() {
-  return <HomePage />;
+  return (
+    <BrowserRouter>
+      <MainLayout />
+    </BrowserRouter>
+  );
 }
 
 export default App;
