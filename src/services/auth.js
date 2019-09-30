@@ -11,20 +11,23 @@ export const loged = (token) => {
 };
 
 export const login = (values) => {
-  // const values = {
-  //   "email": email,
-	//   "password": senha
-  // }
+
   axios.post('http://riodocampolimpo.herokuapp.com/admin/signin', values)
     .then(res => {
       console.log("teste");
-      console.log("aki" + res.data);
+      console.log(res.data);
       // console.log("Status: " + res.status);
-      if(res.success === true) {
+      if(res.data.success === true) {
         loged(res.data.token);
-        console.log("logado");
+        return 200;
       } else {
         console.log("não logado");
+      }
+    }) .catch(function (error) {
+      console.log(error.response);
+      console.log("Erro:" + error.response.status);
+      if (error.response.status === 401) {
+        return 401;
       }
     });
 };

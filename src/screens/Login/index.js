@@ -1,27 +1,42 @@
 import React from "react";
-import { Card, Form, Input, Icon, Layout, Row, Divider, Button, Typography } from 'antd';
+import { Card, Form, Input, Icon, Layout, Row, Button, Typography, notification } from 'antd';
 import 'antd/dist/antd.css';
 import styles from './Login.module.scss';
 import { login } from '../../services/auth';
 
 const { Content, Footer } = Layout;
-const { Title } = Typography;
+// const { Title } = Typography;
 
 function LoginPage(props) {
   const handleSubmit = (e) => {
-    console.log("entrou");
 
     e.preventDefault();
     props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
-
-        const resp = login(values.email, values.senha);
-        console.log("final");
-      }
+        console.log("e2");
+        fazLogin(values);
+      };
     });
     
   };
+
+  async function fazLogin(values) {
+    console.log("e1");
+    var resp = await login(values);
+    console.log("final");
+
+    if (resp === 200) {
+      notification['success']({
+        message: 'Usuário logado.',
+        description: 'Login realizado com sucesso!'
+      });
+    } else if (resp === 401) {
+      notification['error']({
+        message: 'Não foi possível realizar o login.',
+        description: 'E-mail ou senha inválido!'
+      });
+    }
+  }
 
   const { getFieldDecorator } = props.form;
 
@@ -49,7 +64,7 @@ function LoginPage(props) {
               </Form.Item>
 
               <Form.Item>
-                {getFieldDecorator('senha', { rules: [{ required: true, message: 'Coloque sua senha!' }], })(
+                {getFieldDecorator('password', { rules: [{ required: true, message: 'Coloque sua senha!' }], })(
                   <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} 
                 type="password" placeholder="Senha" /> )}
               </Form.Item>
