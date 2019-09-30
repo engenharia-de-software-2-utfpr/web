@@ -1,26 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
 
-const { Content, Header } = Layout;
+const { Content, Header, Sider } = Layout;
 
 function MainLayout(props) {
+  const [collapsed, setCollapsed] = useState(false);
+
+  const toggle = () => {
+    setCollapsed(!collapsed);
+  };
   return (
     <Layout>
-      {/* <Header className="header">
-        <div className="logo" />
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={["2"]}
-          style={{ lineHeight: "64px" }}
-        >
-          <Menu.Item key="1">nav 1</Menu.Item>
-          <Menu.Item key="2">nav 2</Menu.Item>
-          <Menu.Item key="3">nav 3</Menu.Item>
-        </Menu>
-      </Header> */}
-        <Layout style={{ padding: '24px', height: '100vh' }}>
+        <Sider trigger={null} collapsible collapsed={collapsed}>
+          <div className="logo" />
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+            <Menu.Item key="1">
+              <Icon type="user" />
+              <span>Usuários</span>
+            </Menu.Item>
+            <Menu.Item key="2">
+              <Icon type="video-camera" />
+              <span>Ocorrências</span>
+            </Menu.Item>
+            <Menu.Item key="3">
+              <Icon type="upload" />
+              <span>nav 3</span>
+            </Menu.Item>
+          </Menu>
+        </Sider>
+        <Layout>
+          <Header style={{ background: '#fff', padding: 0 }}>
+            <Icon
+              className="trigger"
+              type={collapsed ? 'menu-unfold' : 'menu-fold'}
+              onClick={toggle}
+            />
+          </Header>
           <Content
             style={{
               background: '#fff',
@@ -32,8 +48,8 @@ function MainLayout(props) {
         >
           {props.children}
         </Content>
-    </Layout>
-  </Layout>
+        </Layout>
+      </Layout>
   );
 }
 

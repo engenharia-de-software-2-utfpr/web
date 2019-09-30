@@ -1,5 +1,5 @@
 import HomePage from "../screens/HomeScreen";
-import LayoutScreen from "../screens/LayoutScreen";
+// import LoginPage from "../screens/Login";
 
 export default [
     {
@@ -10,12 +10,12 @@ export default [
         component: HomePage,
         key: 'home',
     },
-    {
-        path: '/layout',
-        exact: true,
-        hidden: true,
-        public: true,
-        component: LayoutScreen,
-        key: 'home',
-    },
+    // {
+    //     path: '/login',
+    //     exact: true,
+    //     hidden: true,
+    //     public: true,
+    //     component: LoginPage,
+    //     key: 'login',
+    // },
 ];
