@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Layout, Divider, Table, Typography, Icon, Popconfirm, message } from 'antd';
+import { Layout, Divider, Table, Typography, Icon, Popconfirm, message, notification } from 'antd';
 // import { Link } from "react-router-dom";
 import 'antd/dist/antd.css';
-// import styles from './Pendencias.module.scss';
-import { getPendentes } from '../../services/ocorrenciasPendentes';
+import styles from './ListasOcorrencias.module.scss';
+import { getPendentes, aprovaPendente } from '../../services/listasOcorrencias';
 
 const { Content } = Layout;
 const { Title } = Typography;
 
+// Colunas da tabela
+// Começam ordenadas crescente pelo campo Nome
 const columns = [
   {
     title: 'Nome',
@@ -29,17 +31,31 @@ const columns = [
     dataIndex: '',
     key: 'x',
     // render: (id) => <span> <Link to="/"><Icon type = "eye" theme = "twoTone" twoToneColor = "#5d7f28" /></Link>  <Icon type = "like" theme = "twoTone" twoToneColor = "#5d7f28" /> </span>,
-    render: (id) => <span> <a href="ocorrencia"><Icon type = "eye" theme = "twoTone" twoToneColor = "#5d7f28" /></a>  
+    render: (text, record) => <span> <a href="ocorrencia" ><Icon type = "eye" theme = "twoTone" twoToneColor = "#5d7f28" className = {[styles.iconAcaoLista, styles.iconOlhoAcaoLista]} /></a>  
                     <Popconfirm
                       title="Tem certeza que quer aprovar a ocorrência?"
-                      onConfirm={confirm}
-                      onCancel={cancel}
+                      onConfirm={() => {try {
+                                  aprovaPendente('111', {status: "approved"});
+                                  notification['success']({
+                                    message: 'Ocorrência aprovada!',
+                                    description: 'A ocorrência foi aprovada com sucessso. '
+                                  });
+                                } catch(ex) {
+                                  notification['error']({
+                                    message: 'Ocorrência não aprovada!',
+                                    description: 'Problemas ocorreram ao aprovar a ocorrência. '
+                                  });
+                                }}
+                              }
+                      onCancel={cancelaAprovacao}
                       okText="Sim"
                       cancelText="Não"
-                    ><Icon type = "like" theme = "twoTone" twoToneColor = "#5d7f28" /></Popconfirm> </span>,
+                    ><Icon type = "like"  className = {styles.iconAcaoLista} /></Popconfirm> </span>,
   },
 ];
 
+// Dados para teste
+// Pode apagar quando a rota estiver funcionando
 const data = [
   {
     _id: 1,
@@ -65,12 +81,13 @@ const data = [
 ];
 
 // Funções do Popconfirm
-function confirm(e) {
-  console.log(e);
-  message.success('Ocorrência aprovada.');
-}
+// function confirmaAprovacao(e, id) {
+//   console.log(e);
+//   aprovaPendente('111', {status: "approved"});
+//   message.success('Ocorrência aprovada.');
+// }
 
-function cancel(e) {
+function cancelaAprovacao(e) {
   console.log(e);
   message.error('Click on No');
 }
@@ -85,12 +102,12 @@ export default function PendenciasPage(props) {
   }, []);
 
   return (
-    <Content className = "contentLayoutForm" style = {{ padding: "30px 20px 0px 20px" }} >
+    <Content className = {styles.contentLista} >
 
-      <Title className = "titleForm" level={3}> Ocorrências - Pendências</Title>
+      <Title className = "titleLista" level={3}> Ocorrências - Pendências</Title>
       <Divider />
 
-      <Table rowKey="_id" columns={columns} dataSource={data} />
+      <Table rowKey="_id" columns={columns} dataSource={data} className={styles.tableOcorrencias} />
       
 
   </Content>

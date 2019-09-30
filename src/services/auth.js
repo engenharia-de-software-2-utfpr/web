@@ -28,6 +28,8 @@ export const login = (values) => {
       console.log("Erro:" + error.response.status);
       if (error.response.status === 401) {
         return 401;
+      } else {
+        return 500;
       }
     });
 };

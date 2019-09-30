@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Form, Input, Icon, Layout, Row, Button, Typography, notification } from 'antd';
+import { Card, Form, Input, Icon, Layout, Row, Button, notification } from 'antd';
 import 'antd/dist/antd.css';
 import styles from './Login.module.scss';
 import { login } from '../../services/auth';
@@ -24,16 +24,23 @@ function LoginPage(props) {
     console.log("e1");
     var resp = await login(values);
     console.log("final");
+    console.log(resp);
 
     if (resp === 200) {
       notification['success']({
         message: 'Usuário logado.',
         description: 'Login realizado com sucesso!'
       });
+      window.location.replace("http://localhost:3000/pendentes"); 
     } else if (resp === 401) {
       notification['error']({
         message: 'Não foi possível realizar o login.',
         description: 'E-mail ou senha inválido!'
+      });
+    } else {
+      notification['error']({
+        message: 'Não foi possível realizar o login.',
+        description: 'Consulte um técnico!'
       });
     }
   }

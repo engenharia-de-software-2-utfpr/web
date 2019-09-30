@@ -1,5 +1,22 @@
 import axios from 'axios';
 
+// Todas as ocorrências
+export const getOcorrencias = () => {
+  axios.get('http://riodocampolimpo.herokuapp.com/occurrence-admin')
+    .then(res => {
+      console.log("teste");
+      console.log("aki" + res.data);
+      // console.log("Status: " + res.status);
+      return res.data;
+    }).catch(function (error) {
+      console.log("erro: " + error);
+
+      // return([{"_id": '1', "name": "Thais Zorawski", "category": "Incêndio"},{"_id": '2', "name": "Carlos Eduardo Zorawski", "category": "Foco de dengue"},]);
+      return([]);
+    });
+};
+
+// Ocorrências Pendentes
 export const getPendentes = () => {
   axios.get('http://riodocampolimpo.herokuapp.com/occurrence-admin?status=waiting')
     .then(res => {
