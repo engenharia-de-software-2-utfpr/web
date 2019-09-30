@@ -1,12 +1,18 @@
 import React from "react";
 
-import { BrowserRouter } from 'react-router-dom';
-import MainLayout from "./layout/MainLayout";
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import routes from "../src/routes";
 
 function App() {
+  const renderContent = () => {
+    return routes.map((route, index) => <Route key={index} {...route} />);
+  }
+
   return (
     <BrowserRouter>
-      <MainLayout />
+      <Switch>
+				{ renderContent() }
+			</Switch>
     </BrowserRouter>
   );
 }

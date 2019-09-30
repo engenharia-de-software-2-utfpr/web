@@ -1,31 +1,40 @@
 import React from "react";
 
-import { Switch, Route, withRouter } from 'react-router-dom';
-import { Layout, Menu, Breadcrumb, Icon } from "antd";
-import routes from "../routes";
-import Header from "./Header";
+import { Layout, Menu } from 'antd';
 
-const { SubMenu } = Menu;
-const { Content, Sider } = Layout;
+const { Content, Header } = Layout;
 
-const renderContent = () => {
-	return routes.map((route, index) => <Route key={index} {...route} />);
-}
-
-function MainLayout() {
+function MainLayout(props) {
   return (
     <Layout>
-      <Header />
-      <Layout>
-        
-        <Layout style={{ padding: "0 24px 24px" }}>
-					<Switch>
-						{ renderContent() }
-					</Switch>
-        </Layout>
-      </Layout>
+      {/* <Header className="header">
+        <div className="logo" />
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          defaultSelectedKeys={["2"]}
+          style={{ lineHeight: "64px" }}
+        >
+          <Menu.Item key="1">nav 1</Menu.Item>
+          <Menu.Item key="2">nav 2</Menu.Item>
+          <Menu.Item key="3">nav 3</Menu.Item>
+        </Menu>
+      </Header> */}
+        <Layout style={{ padding: '24px', height: '100vh' }}>
+          <Content
+            style={{
+              background: '#fff',
+              // padding: 24,
+              margin: 0,
+              height: '100%',
+              minHeight: 280,
+            }}
+        >
+          {props.children}
+        </Content>
     </Layout>
+  </Layout>
   );
 }
 
-export default withRouter(MainLayout);
+export default MainLayout;
