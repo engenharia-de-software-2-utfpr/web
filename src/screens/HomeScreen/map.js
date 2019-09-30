@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Map, TileLayer, Marker } from "react-leaflet";
-import L from 'leaflet';
+import { getOccurrences } from "../../services/occurrences";
 import styles from "./map.module.scss";
-import { getOccurrencies } from "../../services/occurrencies";
+import respectiveMarker from "../../helpers/occurrenceMarkers";
 
-const dengue = new L.Icon({
-  iconUrl: require('../../assets/icons/dengue.jpg'),
-  iconRetinaUrl: require('../../assets/icons/dengue.jpg'),
-  iconAnchor: [5, 55],
-  popupAnchor: [10, -44],
-  iconSize: [25, 25]
-})
 
 function MapRender() {
   const [position] = useState({
@@ -19,20 +12,20 @@ function MapRender() {
     zoom: 14
   });
 
-  const getApprovedOccurencies = () => {
-    return getOccurrencies('approved').then(response => setOccurrencies(response.data.data));
+  const getApprovedOccurences = () => {
+    return getOccurrences('approved').then(response => setOccurrences(response.data.data));
   } 
 
   useEffect(() => {
-    getApprovedOccurencies(); 
+    getApprovedOccurences(); 
   }, []);
 
-  const [occurrencies, setOccurrencies] = useState([]);
+  const [occurrences, setOccurrences] = useState([]);
 
   const renderMarkers = () => {
-    return occurrencies.map(occurrence => {
+    return occurrences.map(occurrence => {
       const position = [occurrence.latitude, occurrence.longitude]; 
-      return <Marker position={position} icon={dengue}></Marker>
+      return <Marker position={position} icon={respectiveMarker(occurrence.category_id)}></Marker>
     });
   };
 
