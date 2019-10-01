@@ -23,8 +23,8 @@ function LoginPage(props) {
   async function fazLogin(values) {
     console.log("e1");
     var resp = await login(values);
-    console.log("final");
     console.log(resp);
+    console.log("final");
 
     if (resp === 200) {
       notification['success']({

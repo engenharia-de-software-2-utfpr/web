@@ -21,9 +21,9 @@ const columns = [
   },
   {
     title: 'Categoria',
-    dataIndex: 'category',
-    onFilter: (value, record) => record.category.indexOf(value) === 0,
-    sorter: (a, b) => ("" + a.category).localeCompare(b.category),
+    dataIndex: 'category_id',
+    onFilter: (value, record) => record.category_id.indexOf(value) === 0,
+    sorter: (a, b) => ("" + a.category_id).localeCompare(b.category_id),
     sortDirections: ['ascend', 'descend'],
   },
   {
@@ -34,8 +34,10 @@ const columns = [
     render: (text, record) => <span> <a href="ocorrencia" ><Icon type = "eye" theme = "twoTone" twoToneColor = "#5d7f28" className = {[styles.iconAcaoLista, styles.iconOlhoAcaoLista]} /></a>  
                     <Popconfirm
                       title="Tem certeza que quer aprovar a ocorrência?"
-                      onConfirm={() => {try {
-                                  aprovaPendente('111', {status: "approved"});
+                      onConfirm={async() => {try {
+                                  const res = await aprovaPendente(record.id, {status: "approved"});
+                                  console.log("resp");
+                                  console.log(res);
                                   notification['success']({
                                     message: 'Ocorrência aprovada!',
                                     description: 'A ocorrência foi aprovada com sucessso. '
@@ -47,58 +49,25 @@ const columns = [
                                   });
                                 }}
                               }
-                      onCancel={cancelaAprovacao}
+                      onCancel={()=>{}}
                       okText="Sim"
                       cancelText="Não"
                     ><Icon type = "like"  className = {styles.iconAcaoLista} /></Popconfirm> </span>,
   },
 ];
 
-// Dados para teste
-// Pode apagar quando a rota estiver funcionando
-const data = [
-  {
-    _id: 1,
-    name: 'John Brown',
-    age: 32,
-    category: 'New York No. 1 Lake Park',
-    description: 'My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.',
-  },
-  {
-    _id: 2,
-    name: 'Jim Green',
-    age: 42,
-    category: 'London No. 1 Lake Park',
-    description: 'My name is Jim Green, I am 42 years old, living in London No. 1 Lake Park.',
-  },
-  {
-    _id: 3,
-    name: 'Joe Black',
-    age: 32,
-    category: 'Sidney No. 1 Lake Park',
-    description: 'My name is Joe Black, I am 32 years old, living in Sidney No. 1 Lake Park.',
-  },
-];
-
-// Funções do Popconfirm
-// function confirmaAprovacao(e, id) {
-//   console.log(e);
-//   aprovaPendente('111', {status: "approved"});
-//   message.success('Ocorrência aprovada.');
-// }
-
-function cancelaAprovacao(e) {
-  console.log(e);
-  message.error('Click on No');
-}
-
 export default function PendenciasPage(props) {
-  const [pendencias, setPendencias] = useState({});
+  const [pendencias, setPendencias] = useState([]);
 
   // componentDidMount()
-  useEffect(() => {
-    const listaPendentes = getPendentes();
-    setPendencias(listaPendentes);
+  useEffect(async() => {
+    console.log("entrou effect");
+    if(pendencias.length === 0) {
+      const listaPendentes = await getPendentes();
+      console.log(listaPendentes);
+    
+      setPendencias(listaPendentes);
+    }
   }, []);
 
   return (
@@ -107,7 +76,7 @@ export default function PendenciasPage(props) {
       <Title className = "titleLista" level={3}> Ocorrências - Pendências</Title>
       <Divider />
 
-      <Table rowKey="_id" columns={columns} dataSource={data} className={styles.tableOcorrencias} />
+      <Table rowKey="id" columns={columns} dataSource={pendencias} className={styles.tableOcorrencias} />
       
 
   </Content>
