@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 import { Layout, Menu, Icon, Modal } from "antd";
-import styles from "./MainLayout.module.scss"
+import styles from "./MainLayout.module.scss";
+import { Link } from "react-router-dom";
 
 const { Header, Sider, Content } = Layout;
 const { confirm } = Modal;
@@ -27,33 +28,39 @@ function MainLayout(props) {
 
   const menuItems = [
     {
-      key: 'map',
+      key: 'home',
       label: 'Mapa',
       icon: 'global',
+      path: '/home',
     },
     {
       key: 'allOccurence',
       label: 'Ocorrência',
       icon: 'alert',
+      path: '/allOccurrences'
     },
     {
       key: 'pendencias',
       label: 'Ocorrências Pendentes',
       icon: 'alert',
+      auth: '/pendencias'
     },
     {
       key: 'user',
       label: 'Usuários',
       icon: 'user',
+      path: '/users'
     },
   ]
 
   const renderMenuItems = () => {
     return menuItems.map(item => {
       return (
-        <Menu.Item key={item.key}>
-          <Icon type={item.icon} />
-          <span>{item.label}</span>
+        <Menu.Item key={item.key} >
+          <Link to = {item.path}>
+            <Icon type={item.icon} />
+            <span>{item.label}</span>
+          </Link>
         </Menu.Item>
       )
     });

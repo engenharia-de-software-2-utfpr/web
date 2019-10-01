@@ -13,7 +13,7 @@ function LoginPage(props) {
     e.preventDefault();
     props.form.validateFields((err, values) => {
       if (!err) {
-        console.log("e2");
+        // console.log("e2");
         fazLogin(values);
       };
     });
@@ -21,17 +21,17 @@ function LoginPage(props) {
   };
 
   async function fazLogin(values) {
-    console.log("e1");
+    // console.log("e1");
     var resp = await login(values);
-    console.log(resp);
-    console.log("final");
+    // console.log(resp);
+    // console.log("final");
 
     if (resp === 200) {
       notification['success']({
         message: 'Usuário logado.',
         description: 'Login realizado com sucesso!'
       });
-      window.location.replace("http://localhost:3000/pendentes"); 
+      window.location.replace("/home"); 
     } else if (resp === 401) {
       notification['error']({
         message: 'Não foi possível realizar o login.',
