@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Layout, Divider, Table, Typography, Icon, Popconfirm, message, notification } from 'antd';
-// import { Link } from "react-router-dom";
+import { Layout, Divider, Table, Typography, Icon, Popconfirm, notification } from 'antd';
+import { Link } from "react-router-dom";
 import 'antd/dist/antd.css';
 import styles from './ListasOcorrencias.module.scss';
 import { getPendentes, aprovaPendente } from '../../services/listasOcorrencias';
+import MainLayout from "../../layout/MainLayout";
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -30,8 +31,7 @@ const columns = [
     title: 'Ações',
     dataIndex: '',
     key: 'x',
-    // render: (id) => <span> <Link to="/"><Icon type = "eye" theme = "twoTone" twoToneColor = "#5d7f28" /></Link>  <Icon type = "like" theme = "twoTone" twoToneColor = "#5d7f28" /> </span>,
-    render: (text, record) => <span> <a href="ocorrencia" ><Icon type = "eye" theme = "twoTone" twoToneColor = "#5d7f28" className = {[styles.iconAcaoLista, styles.iconOlhoAcaoLista]} /></a>  
+    render: (text, record) => <span> <Link to="/ocorrencia"><Icon type = "eye" theme = "twoTone" twoToneColor = "#5d7f28" className = {[styles.iconAcaoLista, styles.iconOlhoAcaoLista]} /></Link> 
                     <Popconfirm
                       title="Tem certeza que quer aprovar a ocorrência?"
                       onConfirm={async() => {try {
@@ -72,14 +72,13 @@ export default function PendenciasPage(props) {
   }, []);
 
   return (
-    <Content className = {styles.contentLista} >
+    <MainLayout>
+      <Content className = {styles.contentLista} >
+        <Title className = "titleLista" level={3}> Ocorrências - Pendências</Title>
+        <Divider />
 
-      <Title className = "titleLista" level={3}> Ocorrências - Pendências</Title>
-      <Divider />
-
-      <Table rowKey="id" columns={columns} dataSource={pendencias} className={styles.tableOcorrencias} />
-      
-
-  </Content>
+        <Table rowKey="id" columns={columns} dataSource={pendencias} className={styles.tableOcorrencias} />
+    </Content>
+  </MainLayout>
   );
 }

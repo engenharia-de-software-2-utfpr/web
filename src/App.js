@@ -1,14 +1,20 @@
 import React from "react";
 
-import HomePage from "./screens/HomePage";
-import Login from "./screens/Login";
-import Pendencias from "./screens/Ocorrencias/pendentes";
-import AllOcorrencias from "./screens/Ocorrencias/ocorrencias";
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import routes from "../src/routes";
 
 function App() {
-  // return <Login />;
-  // return <Pendencias />;
-  return <AllOcorrencias />;
+  const renderContent = () => {
+    return routes.map((route, index) => <Route key={index} {...route} />);
+  }
+
+  return (
+    <BrowserRouter>
+      <Switch>
+				{ renderContent() }
+			</Switch>
+    </BrowserRouter>
+  );
 }
 
 export default App;
