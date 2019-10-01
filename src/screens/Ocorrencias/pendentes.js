@@ -36,8 +36,9 @@ const columns = [
                       title="Tem certeza que quer aprovar a ocorrência?"
                       onConfirm={async() => {try {
                                   const res = await aprovaPendente(record.id, {status: "approved"});
-                                  console.log("resp");
-                                  console.log(res);
+                                  // console.log("resp");
+                                  // console.log(record.id);
+                                  // console.log(res);
                                   notification['success']({
                                     message: 'Ocorrência aprovada!',
                                     description: 'A ocorrência foi aprovada com sucessso. '
@@ -61,10 +62,10 @@ export default function PendenciasPage(props) {
 
   // componentDidMount()
   useEffect(async() => {
-    console.log("entrou effect");
+    // console.log("entrou effect");
     if(pendencias.length === 0) {
       const listaPendentes = await getPendentes();
-      console.log(listaPendentes);
+      // console.log(listaPendentes);
     
       setPendencias(listaPendentes);
     }

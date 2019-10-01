@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Layout, Divider, Table, Typography, Icon, Popconfirm, message } from 'antd';
 // import { Link } from "react-router-dom";
 import 'antd/dist/antd.css';
-// import styles from './Pendencias.module.scss';
-import { getOcorrencias } from '../../services/listaOcorrencias';
+import styles from './ListasOcorrencias.module.scss';
+import { getOcorrencias } from '../../services/listasOcorrencias';
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -21,9 +21,9 @@ const columns = [
   },
   {
     title: 'Categoria',
-    dataIndex: 'category',
-    onFilter: (value, record) => record.category.indexOf(value) === 0,
-    sorter: (a, b) => ("" + a.category).localeCompare(b.category),
+    dataIndex: 'category_id',
+    onFilter: (value, record) => record.category_id.indexOf(value) === 0,
+    sorter: (a, b) => ("" + a.category_id).localeCompare(b.category_id),
     sortDirections: ['ascend', 'descend'],
   },
   {
@@ -38,7 +38,7 @@ const columns = [
     dataIndex: '',
     key: 'x',
     // render: (id) => <span> <Link to="/"><Icon type = "eye" theme = "twoTone" twoToneColor = "#5d7f28" /></Link></span>,
-    render: (id) => <span> <a href="ocorrencia"><Icon type = "eye" theme = "twoTone" twoToneColor = "#5d7f28" /></a></span>,
+    render: (id) => <span> <a href="ocorrencia"><Icon type = "eye" theme = "twoTone" twoToneColor = "#5d7f28" className = {styles.iconAcaoLista} /></a></span>,
   },
 ];
 
@@ -69,12 +69,17 @@ const data = [
 ];
 
 export default function OcorrenciasPage(props) {
-  const [ocorrencias, setOcorrencias] = useState({});
+  const [ocorrencias, setOcorrencias] = useState([]);
 
   // componentDidMount()
-  useEffect(() => {
-    const listaOcorrencias = getOcorrencias();
-    setOcorrencias(listaOcorrencias);
+  useEffect(async() => {
+    console.log("entrou effect");
+    if(ocorrencias.length === 0) {
+      const listaOcorrencias = await getOcorrencias();
+      console.log(listaOcorrencias);
+
+      setOcorrencias(listaOcorrencias);
+    }
   }, []);
 
   return (
@@ -83,7 +88,7 @@ export default function OcorrenciasPage(props) {
       <Title className = "titleForm" level={3}> Ocorrências</Title>
       <Divider />
 
-      <Table rowKey="_id" columns={columns} dataSource={data} />
+      <Table rowKey="id" columns={columns} dataSource={ocorrencias} />
       
 
   </Content>
