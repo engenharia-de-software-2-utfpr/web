@@ -40,10 +40,10 @@ function MainLayout(props) {
       path: '/allOccurrences'
     },
     {
-      key: 'pendencias',
+      key: 'pendingPage',
       label: 'Ocorrências Pendentes',
       icon: 'alert',
-      auth: '/pendencias'
+      path: '/pendencias'
     },
     {
       key: 'user',
@@ -57,10 +57,10 @@ function MainLayout(props) {
     return menuItems.map(item => {
       return (
         <Menu.Item key={item.key} >
-          <Link to = {item.path}>
+          {/* <Link to = {item.path}> */}
             <Icon type={item.icon} />
             <span>{item.label}</span>
-          </Link>
+          {/* </Link> */}
         </Menu.Item>
       )
     });

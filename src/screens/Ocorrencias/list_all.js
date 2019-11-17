@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Layout, Divider, Table, Typography, Icon } from 'antd';
 import { Link } from "react-router-dom";
 import 'antd/dist/antd.css';
-import styles from './ListasOcorrencias.module.scss';
-import { getOcorrencias } from '../../services/listasOcorrencias';
+import styles from './OccurrencesList.module.scss';
+import { getOcorrencias } from '../../services/OccurrencesList';
 import MainLayout from "../../layout/MainLayout";
 
 const { Content } = Layout;

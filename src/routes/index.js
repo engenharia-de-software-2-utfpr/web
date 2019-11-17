@@ -1,7 +1,7 @@
 import HomePage from "../screens/HomeScreen";
 import LoginPage from "../screens/Login";
-import PendenciasPage from "../screens/Ocorrencias/pendentes";
-import AllOcorrenciasPage from "../screens/Ocorrencias/ocorrencias";
+import PendingPage from "../screens/Ocorrencias/list_pending";
+import AllOcorrenciasPage from "../screens/Ocorrencias/list_all";
 
 export default [
     {
@@ -17,11 +17,11 @@ export default [
         exact: true,
         hidden: true,
         public: true,
-        component: PendenciasPage,
-        key: 'pendencias',
+        component: PendingPage,
+        key: 'pendingPage',
     },
     {
-        path: '/allOccurrences',
+        path: '/ocorrencias',
         exact: true,
         hidden: true,
         public: true,
