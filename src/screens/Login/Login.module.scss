@@ -1,0 +1,32 @@
+.contentLogoLogin {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0%;
+}
+
+.imgLogoLogin {
+  width: 80%;
+  margin-bottom: 0%;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  :global {
+    .ant-btn-primary {
+      background-color: #5d7f28;
+      border-color: #5d7f28;
+    }
+    .ant-btn-primary:hover, .ant-btn-primary:focus {
+      background-color: #6c8a3c;
+      border-color: #6c8a3c;
+    }
+
+    .input:hover, .input:focus {
+      border-color: #5d7f28;
+    }
+  } 
+}
