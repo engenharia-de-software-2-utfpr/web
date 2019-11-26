@@ -1,7 +1,7 @@
 import HomePage from "../screens/HomeScreen";
 import LoginPage from "../screens/Login";
-import PendingPage from "../screens/Ocorrencias/list_pending";
-import AllOcorrenciasPage from "../screens/Ocorrencias/list_all";
+import PendingPage from "../screens/Ocurrences/list_pending";
+import AllOcorrenciasPage from "../screens/Ocurrences/list_all";
 
 export default [
     {
