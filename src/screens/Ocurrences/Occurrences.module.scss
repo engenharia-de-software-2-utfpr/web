@@ -1,0 +1,75 @@
+.contentLista {
+  padding: 30px 20px 0px 20px;
+}
+
+.iconAcaoLista {
+  font-size: 20px;
+  color: #5d7f28;
+}
+
+.iconOlhoAcaoLista {
+  margin-right: 15px;
+}
+
+// Títulos
+.firstTitle {
+  display: inline !important;
+}
+
+.secondTitle {
+  color: #505050 !important;
+  display: inline !important;
+}
+
+// =========== Página de vizualização da ocorrência ===========
+// Tag de criticidade
+.tagCriticity {
+  display: flex;
+  justify-content: flex-end;
+  display: inline !important;
+}
+
+.occurrenceContent {
+  display: flex;
+  justify-content: left;
+  margin-left: 50px !important;
+  margin-right: 50px !important;
+}
+
+.textContent {
+  display: block;
+  width: 60%;
+
+  // Texto da descrição da ocorrência
+  .textDescription {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+}
+
+.mediasContent {
+  width: 40%;
+  height: 100px;
+  background-color: #505050;
+  display: flex;
+  align-items: flex-end;
+
+  :global {
+    .ant-carousel .slick-slide {
+      text-align: center !important;
+      height: 160px !important;
+      line-height: 160px !important;
+      background: #ff0000 !important;
+      overflow: hidden !important;
+      max-height: 100px;
+      width: 50%;
+      object-fit: contain;
+    }
+    
+    .ant-carousel .slick-slide h3 {
+      color: #000000;
+    }
+  }
+  
+}
+
