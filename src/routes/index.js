@@ -1,7 +1,8 @@
 import HomePage from "../screens/HomeScreen";
 import LoginPage from "../screens/Login";
-import PendingPage from "../screens/Ocurrences/list_pending";
-import AllOcorrenciasPage from "../screens/Ocurrences/list_all";
+import PendingPage from "../screens/Ocurrences/listPending";
+import AllOccurrencesPage from "../screens/Ocurrences/listAll";
+import OccurrencePage from "../screens/Ocurrences/ocurrence";
 
 export default [
     {
@@ -25,8 +26,16 @@ export default [
         exact: true,
         hidden: true,
         public: true,
-        component: AllOcorrenciasPage,
+        component: AllOccurrencesPage,
         key: 'allOccurrences',
+    },
+    {
+        path: '/ocorrencia/:id',
+        exact: true,
+        hidden: true,
+        public: true,
+        component: OccurrencePage,
+        key: 'home',
     },
     {
         path: '/',
