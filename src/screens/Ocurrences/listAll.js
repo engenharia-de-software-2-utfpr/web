@@ -46,7 +46,7 @@ const columns = [
     render: situation => {
       const situations = {
         approved: 'Aprovada',
-        reproved: 'Reprovada',
+        rejected: 'Reprovada',
         waiting: 'Em arguardo',
       }
 
