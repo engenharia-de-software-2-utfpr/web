@@ -13,8 +13,8 @@ const { Title } = Typography;
 // Começam ordenadas crescente pelo campo Nome 
 const columns = [
   {
-    title: 'Nome',
-    dataIndex: 'name',
+    title: 'Descrição',
+    dataIndex: 'description',
     onFilter: (value, record) => record.name.indexOf(value) === 0,
     sorter: (a, b) => ("" + a.name).localeCompare(b.name),
     defaultSortOrder: 'ascend',
@@ -26,6 +26,16 @@ const columns = [
     onFilter: (value, record) => record.category_id.indexOf(value) === 0,
     sorter: (a, b) => ("" + a.category_id).localeCompare(b.category_id),
     sortDirections: ['ascend', 'descend'],
+    render: categoria => {
+      const categorias = {
+        solid_waste: 'Dejeito sólido',
+        dengue: 'Foco de dengue',
+        fire: 'Queimada',
+        waste: 'Esgoto',
+      }
+
+      return categorias[categoria];
+    }
   },
   {
     title: 'Situação',
@@ -33,6 +43,15 @@ const columns = [
     onFilter: (value, record) => record.status.indexOf(value) === 0,
     sorter: (a, b) => ("" + a.status).localeCompare(b.status),
     sortDirections: ['ascend', 'descend'],
+    render: situation => {
+      const situations = {
+        approved: 'Aprovada',
+        reproved: 'Reprovada',
+        waiting: 'Em arguardo',
+      }
+
+      return situations[situation];
+    }
   },
   {
     title: 'Ações',
