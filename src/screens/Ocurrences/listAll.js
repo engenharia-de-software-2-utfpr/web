@@ -45,15 +45,13 @@ const columns = [
 export default function OcorrenciasPage(props) {
   const [ocorrencias, setOcorrencias] = useState([]);
 
-  // componentDidMount()
-  useEffect(async() => {
-    console.log("entrou effect");
-    if(ocorrencias.length === 0) {
-      const listaOcorrencias = await getAllOccurrences();
-      console.log(listaOcorrencias);
+  const getOccurrences = () => {
+    return getAllOccurrences().then(response => setOcorrencias(response))
+  }
 
-      setOcorrencias(listaOcorrencias);
-    }
+  // componentDidMount()
+  useEffect(() => {
+    getOccurrences();
   }, []);
 
   return (
