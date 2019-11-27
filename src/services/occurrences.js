@@ -29,7 +29,7 @@ export const getOccurrences = (status) => {
   })
 }
 
-export const aprovaPendente = async (id, values) => {
+export const mudaStatusOcorrencia = async (id, values) => {
   try {
     const res = await axios.put('http://riodocampolimpo.herokuapp.com/occurrence-admin/' + id + '/status', values, {
       headers: {
