@@ -17,30 +17,21 @@ export const getAllOccurrences = async () => {
   }
 };
 
-// Todas as ocorrências para o mapa
+// Ocorrências passando o status desejado na busca por parâmetro
 export const getOccurrences = (status) => {
-  return axios.get('/occurrence-admin', { params: { status } })
+  return axios.get('/occurrence-admin', {
+    params: {
+      status
+    },
+    headers: {
+      'Authorization': 'Bearer ' + getToken(),
+    }
+  })
 }
-
-// Ocorrências Pendentes
-export const getPending = async () => {
-  try {
-    const res = await axios.get('http://riodocampolimpo.herokuapp.com/occurrence-admin?status=waiting', {
-      headers: {
-          'Authorization': 'Bearer ' + getToken(),
-      }});
-
-      if(res.status === 200) {
-        return res.data.data;
-      }
-  } catch (res) {
-    return [];
-  }
-};
 
 export const aprovaPendente = async (id, values) => {
   try {
-    const res = await axios.put('http://riodocampolimpo.herokuapp.com/occurrence-admin/:' + id + '/status', values, {
+    const res = await axios.put('http://riodocampolimpo.herokuapp.com/occurrence-admin/' + id + '/status', values, {
       headers: {
           'Authorization': 'Bearer ' + getToken(),
       }});
