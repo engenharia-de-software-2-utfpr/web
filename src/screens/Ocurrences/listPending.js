@@ -3,7 +3,7 @@ import { Layout, Divider, Table, Typography, Icon, Popconfirm, notification } fr
 import { Link } from "react-router-dom";
 import 'antd/dist/antd.css';
 import styles from './Occurrences.module.scss';
-import { getOccurrences, aprovaPendente } from '../../services/occurrences';
+import { getOccurrences, mudaStatusOcorrencia } from '../../services/occurrences';
 import MainLayout from "../../layout/MainLayout";
 
 const { Content } = Layout;
@@ -42,30 +42,62 @@ export default function PendenciasPage() {
       title: 'Ações',
       dataIndex: '',
       key: 'x',
-      render: (text, record) => <span> <Link to="/ocorrencia"><Icon type = "eye" theme = "twoTone" twoToneColor = "#5d7f28" className = {[styles.iconAcaoLista, styles.iconOlhoAcaoLista]} /></Link> 
-        <Popconfirm
-          title="Tem certeza que quer aprovar a ocorrência?"
-          onConfirm={async() => {
-            try {
-              await aprovaPendente(record.id, {status: "approved"});
-              notification['success']({
-                message: 'Ocorrência aprovada!',
-                description: 'A ocorrência foi aprovada com sucessso.'
-              });
-  
-              getPendingOccurences();
-  
-            } catch(ex) {
-              notification['error']({
-                message: 'Ocorrência não aprovada!',
-                description: 'Problemas ocorreram ao aprovar a ocorrência.'
-              });
-            }}
-                  }
-          onCancel={()=>{}}
-          okText="Sim"
-          cancelText="Não"
-        ><Icon type = "like"  className = {styles.iconAcaoLista} /></Popconfirm> </span>,
+      render: (text, record) => 
+      <span>
+        <Link to="/ocorrencia">
+        <Icon type = "eye" theme = "twoTone" twoToneColor = "#5d7f28" className = {[styles.iconAcaoLista, styles.iconOlhoAcaoLista, styles.iconDislike]} /></Link> 
+          <Popconfirm
+            title="Tem certeza que deseja aprovar a ocorrência?"
+            onConfirm={async() => {
+              try {
+                await mudaStatusOcorrencia(record.id, {status: "approved"});
+                notification['success']({
+                  message: 'Ocorrência aprovada!',
+                  description: 'A ocorrência foi aprovada com sucessso.'
+                });
+    
+                getPendingOccurences();
+    
+              } catch(ex) {
+                notification['error']({
+                  message: 'Ocorrência não aprovada com sucesso!',
+                  description: 'Problemas ocorreram ao aprovar a ocorrência.'
+                });
+              }}
+                    }
+            onCancel={()=>{}}
+            okText="Sim"
+            cancelText="Não"
+          >
+            <Icon type = "like"  className = {styles.iconAcaoLista} />
+          </Popconfirm>
+
+          <Popconfirm
+            title="Tem certeza que deseja reprovar a ocorrência?"
+            onConfirm={async() => {
+              try {
+                await mudaStatusOcorrencia(record.id, {status: "rejected"});
+                notification['success']({
+                  message: 'Ocorrência reprovada!',
+                  description: 'A ocorrência foi reprovada com sucessso.'
+                });
+    
+                getPendingOccurences();
+    
+              } catch(ex) {
+                notification['error']({
+                  message: 'Ocorrência não reprovada!',
+                  description: 'Problemas ocorreram ao reprovar a ocorrência.'
+                });
+              }}
+                    }
+            onCancel={()=>{}}
+            okText="Sim"
+            cancelText="Não"
+          >
+            <Icon type = "dislike"  className = {styles.iconDislike} />
+          </Popconfirm>
+        </span>,
     },
   ];
 
