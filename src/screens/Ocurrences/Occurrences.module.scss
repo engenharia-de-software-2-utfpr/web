@@ -17,7 +17,14 @@
 }
 
 .secondTitle {
-  color: #505050 !important;
+  color: #5c5c5c !important;
+  display: inline !important;
+}
+
+.subTitle {
+  color: #949494 !important;
+  font-weight: 500;
+  text-align: left;
   display: inline !important;
 }
 
@@ -29,47 +36,43 @@
   display: inline !important;
 }
 
+// Bloco mais externo da página
 .occurrenceContent {
-  display: flex;
-  justify-content: left;
   margin-left: 50px !important;
   margin-right: 50px !important;
 }
 
+// Conteúdo da página de ocorrência
 .textContent {
   display: block;
-  width: 60%;
 
   // Texto da descrição da ocorrência
   .textDescription {
     width: 100%;
     margin-bottom: 50px;
+    text-align: left !important;
   }
 }
 
-.mediasContent {
-  width: 40%;
-  height: 100px;
-  background-color: #505050;
-  display: flex;
-  align-items: flex-end;
+  // Todas as mídias da ocorrência
+  .mediasContent {
+    margin-top: 10px;
 
-  :global {
-    .ant-carousel .slick-slide {
-      text-align: center !important;
-      height: 160px !important;
-      line-height: 160px !important;
-      background: #ff0000 !important;
-      overflow: hidden !important;
-      max-height: 100px;
-      width: 50%;
-      object-fit: contain;
-    }
-    
-    .ant-carousel .slick-slide h3 {
-      color: #000000;
-    }
+      // Estilo do grid de mídias
+      .cardGridStyle {
+        text-align: center;
+        padding: 5px;
+        max-width: 25%;
+        min-height: 120px;
+      }
+
+      .cardImage {
+        max-width: 100%;
+        max-height: 100px;
+      }
+
+      .drawerImage {
+        min-height: 400px;
+        max-width: 500px;
+      }
   }
-  
-}
-
