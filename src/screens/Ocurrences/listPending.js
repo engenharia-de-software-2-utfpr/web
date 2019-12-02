@@ -40,11 +40,11 @@ export default function PendenciasPage() {
     },
     {
       title: 'Ações',
-      dataIndex: '',
+      dataIndex: 'id',
       key: 'x',
       render: (text, record) => 
       <span>
-        <Link to="/ocorrencia">
+        <Link to={"/ocorrencia/" + record.id}>
         <Icon type = "eye" theme = "twoTone" twoToneColor = "#5d7f28" className = {[styles.iconAcaoLista, styles.iconOlhoAcaoLista, styles.iconDislike]} /></Link> 
           <Popconfirm
             title="Tem certeza que deseja aprovar a ocorrência?"

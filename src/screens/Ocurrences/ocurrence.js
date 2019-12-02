@@ -17,7 +17,7 @@ export default function OccorrencePage(props) {
   const [categoryName, setCategoryName] = useState([]);
   const [curentImage, setCurentImage] = useState([]);
 
-  const [drawerVisible, setDrawerVisible] = useState([]);
+  const [drawerVisible, setDrawerVisible] = useState();
 
   // De acordo com o nível de criticidade, a tag assume uma cor
   const criticity_colors = ["gold", "orange", "volcano", "red", "magenta"];
@@ -39,9 +39,9 @@ export default function OccorrencePage(props) {
     for (let i = 0; i < 7; i++) {
       var imagem = "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png";
       card.push(
-        <Card.Grid className = {[styles.cardGridStyle]}>
+        <Card.Grid className = {[styles.cardGridStyle]} key = "mudar quando tiver rota - unique">
           <Button type = "link" ghost onClick = {() => showDrawer(imagem)}>
-            <img src = {imagem} className = {[styles.cardImage]}/>
+            <img src = {imagem} alt = "Foto da ocorrência." className = {[styles.cardImage]}/>
           </Button>
         </Card.Grid>
       );
@@ -49,25 +49,28 @@ export default function OccorrencePage(props) {
     return card;
   }
 
-  useEffect(async() => {
+  const getTheOccurrence = async() => {
     var id_occurrence = props.match.params.id;
     console.log("id: " + id_occurrence);
 
     const ocorrencia = await getOccurrence(id_occurrence);
     console.log(ocorrencia);
-      // coloca dados
-      setOccurrenceId(id_occurrence);
-      setOccurrenceDescription(ocorrencia.data.description);
-      setOccurrenceCriticity(ocorrencia.data.criticity_level);
-      setOccurrenceCategoryId(ocorrencia.data.category_id);
-      setDrawerVisible(false);
+    // coloca dados
+    setOccurrenceId(id_occurrence);
+    setOccurrenceDescription(ocorrencia.data.description);
+    setOccurrenceCriticity(ocorrencia.data.criticity_level);
+    setOccurrenceCategoryId(ocorrencia.data.category_id);
+    setDrawerVisible(false);
 
-      // axios.get('/categories/')
-      // .then(response2 => {
-      //     console.log("categoria: " + xxx)
-      //     setCategoryName(response2.data.name);
-      //   })
+    // axios.get('/categories/')
+    // .then(response2 => {
+    //     console.log("categoria: " + xxx)
+    //     setCategoryName(response2.data.name);
+    //   })
+  }
 
+  useEffect(async() => {
+    getTheOccurrence();
   }, []);
 
 
@@ -99,7 +102,7 @@ export default function OccorrencePage(props) {
             <Card title = "Mídias">
               <Card.Grid className = {[styles.cardGridStyle]}>
                 <Button type = "link" ghost onClick = {() => showDrawer("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSKH1XcPAR8cVxKyNvTiKDVP5KQCKFnIIBxpQG2PFT48BnLKCCs")}>
-                  <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSKH1XcPAR8cVxKyNvTiKDVP5KQCKFnIIBxpQG2PFT48BnLKCCs" className = {[styles.cardImage]}/>
+                  <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSKH1XcPAR8cVxKyNvTiKDVP5KQCKFnIIBxpQG2PFT48BnLKCCs" alt = "Foto da ocorrência." className = {[styles.cardImage]}/>
                 </Button>
               </Card.Grid>
               {createCardGrid()}
@@ -118,7 +121,7 @@ export default function OccorrencePage(props) {
     visible={drawerVisible}
     width={700}
     >
-    <img src = {curentImage} className = {[styles.drawerImage]} />
+    <img src = {curentImage} alt = "Foto da ocorrência." className = {[styles.drawerImage]} />
   </Drawer>
 
   </div>

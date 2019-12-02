@@ -35,7 +35,7 @@ function MainLayout(props) {
     },
     {
       key: 'allOccurence',
-      label: 'Ocorrência',
+      label: 'Ocorrências',
       icon: 'alert',
       path: '/ocorrencias'
     },

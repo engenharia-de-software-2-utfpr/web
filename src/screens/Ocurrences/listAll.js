@@ -55,9 +55,9 @@ const columns = [
   },
   {
     title: 'Ações',
-    dataIndex: '',
+    dataIndex: 'id',
     key: 'x',
-    render: (id) => <span> <Link to="/ocorrencia"><Icon type = "eye" theme = "twoTone" twoToneColor = "#5d7f28" className = {styles.iconAcaoLista} /> </Link></span>,
+    render: (id) => <span> <Link to={"/ocorrencia/" + id}><Icon type = "eye" theme = "twoTone" twoToneColor = "#5d7f28" className = {styles.iconAcaoLista} /> </Link></span>,
   },
 ];
 
