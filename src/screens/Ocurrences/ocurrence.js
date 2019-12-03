@@ -49,30 +49,49 @@ export default function OccorrencePage(props) {
     return card;
   }
 
-  const getTheOccurrence = async() => {
+  // const getTheOccurrence = async() => {
+  //   var id_occurrence = props.match.params.id;
+  //   console.log("id: " + id_occurrence);
+
+  //   const ocorrencia = await getOccurrence(id_occurrence);
+  //   console.log(ocorrencia);
+  //   // coloca dados
+  //   setOccurrenceId(id_occurrence);
+  //   setOccurrenceDescription(ocorrencia.data.description);
+  //   setOccurrenceCriticity(ocorrencia.data.criticity_level);
+  //   setOccurrenceCategoryId(ocorrencia.data.category_id);
+  //   setDrawerVisible(false);
+
+  //   // axios.get('/categories/')
+  //   // .then(response2 => {
+  //   //     console.log("categoria: " + xxx)
+  //   //     setCategoryName(response2.data.name);
+  //   //   })
+  // }
+
+  // useEffect(async() => {
+  //   getTheOccurrence();
+  //   const response = await MyAPI.getData(someId);
+  // }, []);
+
+  useEffect(() => {
+    var ocorrenciaX = [];
     var id_occurrence = props.match.params.id;
     console.log("id: " + id_occurrence);
+    async function fetchData() {
+      ocorrenciaX = await getOccurrence(id_occurrence);
 
-    const ocorrencia = await getOccurrence(id_occurrence);
-    console.log(ocorrencia);
-    // coloca dados
-    setOccurrenceId(id_occurrence);
-    setOccurrenceDescription(ocorrencia.data.description);
-    setOccurrenceCriticity(ocorrencia.data.criticity_level);
-    setOccurrenceCategoryId(ocorrencia.data.category_id);
-    setDrawerVisible(false);
+      console.log(ocorrenciaX);
+      // coloca dados
+      setOccurrenceId(id_occurrence);
+      setOccurrenceDescription(ocorrenciaX.data.description);
+      setOccurrenceCriticity(ocorrenciaX.data.criticity_level);
+      setOccurrenceCategoryId(ocorrenciaX.data.category_id);
+      setDrawerVisible(false);
+    }
+    fetchData();
 
-    // axios.get('/categories/')
-    // .then(response2 => {
-    //     console.log("categoria: " + xxx)
-    //     setCategoryName(response2.data.name);
-    //   })
-  }
-
-  useEffect(async() => {
-    getTheOccurrence();
-  }, []);
-
+  }, []); // Or [] if effect doesn't need props or state
 
 
   return (
