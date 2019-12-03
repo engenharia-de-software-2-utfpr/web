@@ -3,6 +3,7 @@ import LoginPage from "../screens/Login";
 import PendingPage from "../screens/Ocurrences/listPending";
 import AllOccurrencesPage from "../screens/Ocurrences/listAll";
 import OccurrencePage from "../screens/Ocurrences/ocurrence";
+import FormPage from "../screens/Forms";
 
 export default [
     {
@@ -35,7 +36,7 @@ export default [
         hidden: true,
         public: true,
         component: OccurrencePage,
-        key: 'home',
+        key: 'detailedOccurrence',
     },
     {
         path: '/',
@@ -44,5 +45,13 @@ export default [
         public: true,
         component: LoginPage,
         key: 'login',
+    },
+    {
+        path: '/formularios',
+        exact: true,
+        hidden: true,
+        public: true,
+        component: FormPage,
+        key: 'forms',
     },
 ];
