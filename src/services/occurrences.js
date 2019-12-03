@@ -47,7 +47,7 @@ export const mudaStatusOcorrencia = async (id, values) => {
 // Retorna ocorrência com o id passado
 export const getOccurrence = async (id_occurrence) => {
   try {
-    const res = await axios.get('http://riodocampolimpo.herokuapp.com/occurrence/' + id_occurrence, {
+    const res = await axios.get('http://riodocampolimpo.herokuapp.com/occurrence-admin/' + id_occurrence, {
       headers: {
           'Authorization': 'Bearer ' + getToken(),
       }});
