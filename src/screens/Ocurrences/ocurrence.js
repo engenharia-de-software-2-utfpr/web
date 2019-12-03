@@ -23,7 +23,7 @@ export default function OccorrencePage(props) {
 
   // Transpõem o nome da categoria dado o id
   const categorias = {
-    solid_waste: 'Dejeito sólido',
+    solid_waste: 'Dejeto sólido',
     dengue: 'Foco de dengue',
     fire: 'Queimada',
     waste: 'Esgoto',

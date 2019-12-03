@@ -28,7 +28,7 @@ const columns = [
     sortDirections: ['ascend', 'descend'],
     render: categoria => {
       const categorias = {
-        solid_waste: 'Dejeito sólido',
+        solid_waste: 'Dejeto sólido',
         dengue: 'Foco de dengue',
         fire: 'Queimada',
         waste: 'Esgoto',
