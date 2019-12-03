@@ -28,6 +28,12 @@ function MainLayout(props) {
 
   const menuItems = [
     {
+      key: 'forms',
+      label: 'Formulários',
+      icon: 'form',
+      path: '/formularios'
+    },
+    {
       key: 'home',
       label: 'Mapa',
       icon: 'global',
