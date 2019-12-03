@@ -13,7 +13,6 @@ export default function OccorrencePage(props) {
   const [occurrenceId, setOccurrenceId] = useState([]);
   const [occurrenceDescription, setOccurrenceDescription] = useState([]);
   const [occurrenceCriticity, setOccurrenceCriticity] = useState([]);
-  const [occurrenceCategoryId, setOccurrenceCategoryId] = useState([]);
   const [categoryName, setCategoryName] = useState([]);
   const [curentImage, setCurentImage] = useState([]);
 
@@ -21,6 +20,14 @@ export default function OccorrencePage(props) {
 
   // De acordo com o nível de criticidade, a tag assume uma cor
   const criticity_colors = ["gold", "orange", "volcano", "red", "magenta"];
+
+  // Transpõem o nome da categoria dado o id
+  const categorias = {
+    solid_waste: 'Dejeito sólido',
+    dengue: 'Foco de dengue',
+    fire: 'Queimada',
+    waste: 'Esgoto',
+  };
 
   const onCloseDrawer = () => {
     setDrawerVisible(false);
@@ -49,49 +56,23 @@ export default function OccorrencePage(props) {
     return card;
   }
 
-  // const getTheOccurrence = async() => {
-  //   var id_occurrence = props.match.params.id;
-  //   console.log("id: " + id_occurrence);
-
-  //   const ocorrencia = await getOccurrence(id_occurrence);
-  //   console.log(ocorrencia);
-  //   // coloca dados
-  //   setOccurrenceId(id_occurrence);
-  //   setOccurrenceDescription(ocorrencia.data.description);
-  //   setOccurrenceCriticity(ocorrencia.data.criticity_level);
-  //   setOccurrenceCategoryId(ocorrencia.data.category_id);
-  //   setDrawerVisible(false);
-
-  //   // axios.get('/categories/')
-  //   // .then(response2 => {
-  //   //     console.log("categoria: " + xxx)
-  //   //     setCategoryName(response2.data.name);
-  //   //   })
-  // }
-
-  // useEffect(async() => {
-  //   getTheOccurrence();
-  //   const response = await MyAPI.getData(someId);
-  // }, []);
-
   useEffect(() => {
     var ocorrenciaX = [];
     var id_occurrence = props.match.params.id;
-    console.log("id: " + id_occurrence);
+    
     async function fetchData() {
       ocorrenciaX = await getOccurrence(id_occurrence);
 
-      console.log(ocorrenciaX);
       // coloca dados
       setOccurrenceId(id_occurrence);
-      setOccurrenceDescription(ocorrenciaX.data.description);
-      setOccurrenceCriticity(ocorrenciaX.data.criticity_level);
-      setOccurrenceCategoryId(ocorrenciaX.data.category_id);
+      setOccurrenceDescription(ocorrenciaX.description);
+      setOccurrenceCriticity(ocorrenciaX.criticity_level);
+      setCategoryName(categorias[ocorrenciaX.category_id]);
       setDrawerVisible(false);
     }
     fetchData();
 
-  }, []); // Or [] if effect doesn't need props or state
+  }, []);
 
 
   return (
@@ -112,7 +93,7 @@ export default function OccorrencePage(props) {
             
             <div className = {[styles.textCategory]}>
               <p className = {[styles.subTitle]}> Categoria: </p>
-              <div> {occurrenceCategoryId} </div>
+              <div> {categoryName} </div>
             </div>
           </div>
           <br/>
