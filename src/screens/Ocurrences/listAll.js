@@ -28,7 +28,7 @@ const columns = [
     sortDirections: ['ascend', 'descend'],
     render: categoria => {
       const categorias = {
-        solid_waste: 'Dejeito sólido',
+        solid_waste: 'Dejeto sólido',
         dengue: 'Foco de dengue',
         fire: 'Queimada',
         waste: 'Esgoto',
@@ -55,9 +55,9 @@ const columns = [
   },
   {
     title: 'Ações',
-    dataIndex: '',
+    dataIndex: 'id',
     key: 'x',
-    render: (id) => <span> <Link to="/ocorrencia"><Icon type = "eye" theme = "twoTone" twoToneColor = "#5d7f28" className = {styles.iconAcaoLista} /> </Link></span>,
+    render: (id) => <span> <Link to={"/ocorrencia/" + id}><Icon type = "eye" theme = "twoTone" twoToneColor = "#5d7f28" className = {styles.iconAcaoLista} /> </Link></span>,
   },
 ];
 
