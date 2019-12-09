@@ -4,7 +4,7 @@ import { getToken } from './auth';
 // Todas as ocorrências para a lista
 export const getAllOccurrences = async () => {
   try {
-    const res = await axios.get('http://riodocampolimpo.herokuapp.com/occurrence-admin', {
+    const res = await axios.get('https://riodocampolimpo.herokuapp.com/occurrence-admin', {
       headers: {
           'Authorization': 'Bearer ' + getToken(),
       }});
@@ -31,7 +31,7 @@ export const getOccurrences = (status) => {
 
 export const mudaStatusOcorrencia = async (id, values) => {
   try {
-    const res = await axios.put('http://riodocampolimpo.herokuapp.com/occurrence-admin/' + id + '/status', values, {
+    const res = await axios.put('https://riodocampolimpo.herokuapp.com/occurrence-admin/' + id + '/status', values, {
       headers: {
           'Authorization': 'Bearer ' + getToken(),
       }});
@@ -47,7 +47,7 @@ export const mudaStatusOcorrencia = async (id, values) => {
 // Retorna ocorrência com o id passado
 export const getOccurrence = async (id_occurrence) => {
   try {
-    const res = await axios.get('http://riodocampolimpo.herokuapp.com/occurrence-admin/' + id_occurrence, {
+    const res = await axios.get('https://riodocampolimpo.herokuapp.com/occurrence-admin/' + id_occurrence, {
       headers: {
           'Authorization': 'Bearer ' + getToken(),
       }});

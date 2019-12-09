@@ -12,7 +12,7 @@ export const loged = (token) => {
 
 export const login = async (values) => {
   try {
-    const res = await axios.post('http://riodocampolimpo.herokuapp.com/admin/signin', values);
+    const res = await axios.post('https://riodocampolimpo.herokuapp.com/admin/signin', values);
 
     if (res.data.success === true) {
       loged(res.data.data.token);
